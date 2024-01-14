@@ -1,0 +1,1 @@
+web gunicorn textcounter-with-django-main.wsgi:application --log-file -
