@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@vfu!6%#4l9bo(e&=!*%gfm6g)e$ce5xh1b3ok=2w_%an$vr32
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.8.101']
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'emoji_picker',
     'base',
 ]
 
@@ -79,11 +78,11 @@ WSGI_APPLICATION = 'socblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'myproject',
-        # 'USER': '',
-        # 'PASSWORD': '',
-        # 'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'myproject',
+        'USER': 'postgres',
+        'PASSWORD': 'asdf1234',
+        'HOST': 'localhost',
     }
 }
 

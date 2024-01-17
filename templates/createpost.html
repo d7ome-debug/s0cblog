@@ -1,0 +1,7 @@
+{% include 'navbar.html' %}
+
+<form method="POST" enctype="multipart/form-data">
+{{ form.as_p }}
+{% csrf_token %}
+<button>Save Post</button>
+</form>

@@ -8,7 +8,9 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
+    path('createpost', views.CreatePost, name='CreatePost'),
     path('post/<int:id>', views.post, name='post'),
+    # path('userp', views.userp, name='userp'),
     path('counter', views.counter, name='counter'),
 ]
 

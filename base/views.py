@@ -2,11 +2,21 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import Feature, Post
+# from django.contrib.auth.decorators import login_required
+from .forms import PostForm
 # Create your views here.
 
 def index(request):
     features = Feature.objects.all()
     return render(request, 'index.html', {'features': features})
+
+
+
+# @login_required
+# def userp(request):
+#     user = request.user
+#     return render(request, 'userp.html', {'user': user})
+
 
 def register(request):
     if request.method == 'POST':
@@ -53,6 +63,15 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def CreatePost(request):
+    form = PostForm
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid:
+            form.save()
+            return redirect('index')
+    return render(request, 'createpost.html',{'form': form})
 
 def profile(request, user_id):
     profile = User.objects.get(id=user_id)
