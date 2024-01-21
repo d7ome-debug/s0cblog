@@ -1,21 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Feature, Post
+from .models import Feature, Post, View
 # from django.contrib.auth.decorators import login_required
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 # Create your views here.
 
 def index(request):
     features = Feature.objects.all()
     return render(request, 'index.html', {'features': features})
 
-
-
-# @login_required
-# def userp(request):
-#     user = request.user
-#     return render(request, 'userp.html', {'user': user})
+def blog(request):
+    return render(request, 'blog.html')
 
 
 def register(request):
@@ -37,7 +33,7 @@ def register(request):
                 user.save();
                 return redirect('login')
         else:
-            messages.info(request, 'password already used!')
+            messages.info(request, 'password do not match')
             return redirect('register')
     else:
         return render(request, 'register.html')
@@ -64,12 +60,25 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
-def CreatePost(request):
-    form = PostForm
+
+def comment(request, post_id):
+    form = CommentForm
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = CommentForm(request=POST)
         if form.is_valid:
             form.save()
+    return render(request, 'comment.html',{'form': form})
+
+
+def CreatePost(request):
+    form = PostForm
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+
             return redirect('index')
     return render(request, 'createpost.html',{'form': form})
 
@@ -83,4 +92,31 @@ def counter(request):
 
 def post(request, id):
     post = Post.objects.get(id=id)
-    return render(request, 'post.html',{'post': post})
+    view, created = View.objects.get_or_create(post=post)
+    view.views += 1
+    view.save()
+    
+    form = CommentForm
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid:
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+    context = {'post': post, 'form': form, 'view': view}
+    return render(request, 'post.html', context)
+
+def like_post(request, post_id):
+    if not request.user.is_authenticated:
+        messages.info(request, 'account is not loged!')
+        return redirect('counter')
+    
+    if request.method == 'POST':
+        post = Post.objects.get(id=post_id)
+        if request.user not in post.likes.all():
+            post.likes.add(request.user)
+        else:
+            post.likes.remove(request.user)
+        post.save()
+        return redirect('counter')

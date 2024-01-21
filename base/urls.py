@@ -3,15 +3,17 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.counter, name='counter'),
     path('profile/<int:user_id>', views.profile, name='profile'),
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
     path('createpost', views.CreatePost, name='CreatePost'),
     path('post/<int:id>', views.post, name='post'),
-    # path('userp', views.userp, name='userp'),
-    path('counter', views.counter, name='counter'),
+    path('home', views.index, name='index'),
+    path('like/<int:post_id>', views.like_post, name='like'),
+    path('comment/<str:post_id>', views.comment, name='comment'),
+    path('blog', views.blog, name='blog'),
 ]
 
 

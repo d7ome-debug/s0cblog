@@ -1,6 +1,27 @@
+{% include 'navbar.html' %}
 <h1>{{user.username}}</h1>
 <h1>
     {{post.title}}
 </h1>
+{% if post.image %}
+<img src="{{post.image.url}}" />
+{% endif %}
 <p>{{post.content}}</p>
+<hr>
+
+<h6>  {{post.comment_set.count}} comments </h6>
+<form method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    <button>Comment</button>
+</form>
+
+{% for comment in post.comment_set.all %}
+    <br>
+    <a href="{% url 'profile' comment.user.id %}">@{{ comment.user }}</a>
+    <p>{{ comment }}</p>
+    <br>
+    
+{% endfor %}
 
