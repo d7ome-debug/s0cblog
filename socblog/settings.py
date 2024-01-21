@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') != "False"
 # SECURITY WAR!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['192.168.8.101']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
