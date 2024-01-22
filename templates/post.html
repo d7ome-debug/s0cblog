@@ -8,7 +8,7 @@
 {% endif %}
 <p>{{post.content}}</p>
 <hr>
-
+{% if user.is_authenticated %}
 <h6>  {{post.comment_set.count}} comments </h6>
 <form method="post">
     {% csrf_token %}
@@ -16,6 +16,8 @@
     {{ form.as_p }}
     <button>Comment</button>
 </form>
+{% else %}
+<strong>you must create a account if you want to comment</strong>
 
 {% for comment in post.comment_set.all %}
     <br>
