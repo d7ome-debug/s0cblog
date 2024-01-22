@@ -28,6 +28,8 @@ DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = ['socblog.up.railway.app', 'localhost']
 
+CSRF_TRUSTED_ORIGINS=['https://socblog.up.railway.app']
+
 # Application definition
 
 INSTALLED_APPS = [
