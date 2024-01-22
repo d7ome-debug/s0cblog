@@ -26,8 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') != "False"
 # SECURITY WAR!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['socblog.up.railway.app', 'localhost']
 
 # Application definition
 
