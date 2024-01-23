@@ -69,3 +69,101 @@
     </div>
     </body>
 </html>
+
+
+<div class="post">
+  <div class="post-header">
+    <img src="https://i.imgur.com/1a2b3c4.jpg" alt="Profile picture" class="profile-picture">
+    <div class="post-info">
+      <span class="username">John Doe</span>
+      <span class="handle">@johndoe</span>
+      <span class="timestamp">10m</span>
+    </div>
+  </div>
+  <div class="post-body">
+    <p>Here's my tweet!</p>
+  </div>
+  <div class="post-footer">
+    <button class="like-button">Like</button>
+    <span class="like-count">0</span>
+    <button class="comment-button">Comment</button>
+    <span class="comment-count">0</span>
+    <button class="share-button">Share</button>
+  </div>
+</div>
+
+<style>
+  .post {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .post-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .username {
+    font-weight: bold;
+  }
+
+  .handle {
+    color: #555;
+  }
+
+  .timestamp {
+    color: #555;
+    font-size: 12px;
+  }
+
+  .post-body {
+    margin-bottom: 10px;
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .like-button,
+  .comment-button,
+  .share-button {
+    background-color: transparent;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  .like-button:hover,
+  .comment-button:hover,
+  .share-button:hover {
+    text-decoration: underline;
+  }
+
+  .like-count,
+  .comment-count {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+</style>

@@ -26,7 +26,7 @@ class View(models.Model):
         return str(self.views)
     
 class Comment(models.Model):
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField(default=timezone.now)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
