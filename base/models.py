@@ -3,6 +3,19 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_user = models.IntegerField(primary_key=True, default=0)
+    bio = models.TextField(blank=True,default='')
+    profileimg = models.ImageField(upload_to='profileimg', default='https://th.bing.com/th/id/OIP.xo-BCC1ZKFpLL65D93eHcgHaGe?rs=1&pid=ImgDetMain')
+    location = models.CharField(max_length=100,blank=True, default='')
+    
+    def __str__(self):
+        return self.user.username
+
+
+
 class Feature(models.Model):
     name = models.CharField(max_length=123)
     details = models.CharField(max_length=123)
