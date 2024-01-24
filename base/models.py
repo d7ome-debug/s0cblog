@@ -10,11 +10,9 @@ class Profile(models.Model):
     bio = models.TextField(blank=True,default='')
     profileimg = models.ImageField(upload_to='profileimg', default='https://th.bing.com/th/id/OIP.xo-BCC1ZKFpLL65D93eHcgHaGe?rs=1&pid=ImgDetMain')
     location = models.CharField(max_length=100,blank=True, default='')
-    
+
     def __str__(self):
         return self.user.username
-
-
 
 class Feature(models.Model):
     name = models.CharField(max_length=123)
@@ -27,22 +25,22 @@ class Post(models.Model):
     content = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.title
-    
+
 class View(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return str(self.views)
-    
+
 class Comment(models.Model):
     date = models.DateField(default=timezone.now)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.comment

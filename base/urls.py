@@ -11,6 +11,7 @@ urlpatterns = [
     path('createpost', views.CreatePost, name='CreatePost'),
     path('post/<int:id>', views.post, name='post'),
     path('home', views.index, name='index'),
+    # path('search', views.search_blogs, name='search_blogs'),
     path('like/<int:post_id>', views.like_post, name='like'),
     path('comment/<str:post_id>', views.comment, name='comment'),
     path('blog', views.blog, name='blog'),

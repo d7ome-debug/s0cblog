@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import Feature, Post, View
 # from django.contrib.auth.decorators import login_required
 from .forms import PostForm, CommentForm
+
 # Create your views here.
 
 def index(request):
@@ -12,6 +13,7 @@ def index(request):
 
 def blog(request):
     return render(request, 'blog.html')
+
 
 
 def register(request):
@@ -84,7 +86,9 @@ def CreatePost(request):
 
 def profile(request, user_id):
     profile = User.objects.get(id=user_id)
-    return render(request, 'profile.html',{'profile': profile})
+    user_posts = User.objects.get(id=user_id)
+    context = {'user_pots': user_posts, 'profile': profile}
+    return render(request, 'profile.html', context )
 
 def counter(request):
     posts = Post.objects.all()
@@ -120,3 +124,5 @@ def like_post(request, post_id):
             post.likes.remove(request.user)
         post.save()
         return redirect('counter')
+    
+    

@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY') != "False"
 # SECURITY WAR!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['socblog.up.railway.app', 'localhost']
+ALLOWED_HOSTS = ['socblog.up.railway.app', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS=['https://socblog.up.railway.app']
 

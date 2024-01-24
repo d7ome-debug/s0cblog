@@ -1,8 +1,9 @@
 {% include 'navbar.html' %}
-<h1>{{user.username}}</h1>
-<h1>
+<a href="{% url 'profile' post.author.id %}">@{{post.author}}</a><br>
+<a>
     {{post.title}}
-</h1>
+</a>
+<br>
 {% if post.image %}
 <img src="{{post.image.url}}" />
 {% endif %}
@@ -26,4 +27,3 @@
     <hr>
     
 {% endfor %}
-
