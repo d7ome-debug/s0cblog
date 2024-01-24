@@ -1,5 +1,10 @@
 <h1>{{profile.username}}</h1>
 
+<img src="{{user_profile.profileimg.url}}" >
+
+<h1>{{user_profile.bio}}</h1>
 {% for profile in user_posts %}
 
 {% endfor %}
+
+{% load static %}
