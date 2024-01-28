@@ -14,6 +14,7 @@ urlpatterns = [
     # path('search', views.search_blogs, name='search_blogs'),
     path('like/<int:post_id>', views.like_post, name='like'),
     path('comment/<str:post_id>', views.comment, name='comment'),
+    path('languges', views.languges, name='languges'),
     path('blog', views.blog, name='blog'),
 ]
 

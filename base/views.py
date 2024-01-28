@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Feature, Post, View
+from .models import *
 # from django.contrib.auth.decorators import login_required
-from .forms import PostForm, CommentForm
+from .forms import *
 
 # Create your views here.
 
@@ -13,6 +13,9 @@ def index(request):
 
 def blog(request):
     return render(request, 'blog.html')
+
+def languges(request):
+    return render(request, 'languges.html')
 
 
 
@@ -49,7 +52,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            return redirect('counter')
 
         else:
             messages.info(request, 'account is invalid!')
@@ -81,18 +84,33 @@ def CreatePost(request):
             post.author = request.user
             post.save()
 
-            return redirect('index')
+            return redirect('counter')
     return render(request, 'createpost.html',{'form': form})
+
 
 def profile(request, user_id):
     profile = User.objects.get(id=user_id)
-    user_posts = User.objects.get(id=user_id)
-    context = {'user_pots': user_posts, 'profile': profile}
-    return render(request, 'profile.html', context )
+    user_posts = profile.post_set.all()
+    form = ProfileForm
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid:
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+    context = {'profile': profile, 'user_posts': user_posts, 'form': form}
+    return render(request, 'profile.html', context)
 
 def counter(request):
-    posts = Post.objects.all()
-    return render(request, 'counter.html', {'posts': posts})
+    query = request.GET.get("q", "")
+    posts = Post.objects.filter(
+        title__icontains=query
+    )
+
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'counter.html', context)
 
 def post(request, id):
     post = Post.objects.get(id=id)
