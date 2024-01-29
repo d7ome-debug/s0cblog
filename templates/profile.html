@@ -1,8 +1,8 @@
-<h1>{{profile.username}}</h1>
+<h1>{{profile.user.username}}</h1>
 <img src="{{profile.image}}" />
 
 <h2>userbio</h2>
-
+<h1>{{profile.bio}}</h1>
 <form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     {{form.as_p}}
@@ -16,5 +16,3 @@
     <h1>{{ post.title }}</h1>
     <p>{{ post.content }}</h1>
 {% endfor %}
-
-<h1>{{profile.bio}}</h1>

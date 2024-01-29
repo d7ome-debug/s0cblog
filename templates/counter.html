@@ -23,31 +23,56 @@
     <title>socblog</title>
 
   <body class="p-3 m-0 border-0 bd-example m-0 border-0">
-    {% include 'navbar.html' %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+            <form action="" method="get" class="d-flex">
+              <input class="form-control me-2" id="search" name="q" type="search" placeholder="Search post" aria-label="Search"  required>
+            </form>
+          </form>
+        </div>
+      </div>
+    </nav>
     {% for message in messages %}
     <h6 class="alert alert-danger">
       {{message}}
     </h6>
     {% endfor %}
     <!-- Example Code -->
-    
-    <section class="main">
-      <form action="" method="get">
-        <div id="search-todo-container">
-          <input
-            type="search"
-            id="search"
-            name="q"
-            placeholder="Search post"
-            required
-          />
-          <i class="bi bi-search"></i>
-        </div>
-      </form>
+
         <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for post in posts %}
+    <div class="col">
+        {% if request.user == post.author %}
+        <a href="{% url 'update_post' post.id %}" class="btn btn-primary">update post</a>
+        {% endif %}
 
-      <div class="col">
         <div class="card h-100">
           {% if post.image %}
           <img src="{{post.image.url}}"  max-width: 100%; height: auto; width: 350px; height: 400px; @media (min-width: 600px) { width: 600px; height: 600px; }">

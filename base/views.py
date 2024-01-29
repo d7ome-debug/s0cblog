@@ -17,7 +17,19 @@ def blog(request):
 def languges(request):
     return render(request, 'languges.html')
 
+def updatepost(request, post_id):
 
+    post = Post.objects.get(id=post_id)
+    if request.user != post.author:
+        return redirect("/")
+    form = PostForm(instance=post)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid:
+            form.save()
+            return redirect('counter')
+        
+    return render(request, 'update-post.html', {'form': form})
 
 def register(request):
     if request.method == 'POST':
