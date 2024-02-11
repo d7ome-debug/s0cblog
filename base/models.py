@@ -19,9 +19,8 @@ class Feature(models.Model):
 
 class Post(models.Model):
     likes = models.ManyToManyField(User, blank=True, related_name="post_likes")
-    title = models.CharField(max_length=120)
+    title = models.CharField(max_length=123)
     image = models.ImageField(upload_to='post_image', blank=True, null=True)
-    content = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 

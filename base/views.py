@@ -79,6 +79,7 @@ def logout(request):
 
 
 def comment(request, post_id):
+
     form = CommentForm
     if request.method == 'POST':
         form = CommentForm(request=POST)
