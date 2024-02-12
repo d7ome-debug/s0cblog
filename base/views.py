@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import *
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from .forms import *
-
+from django.utils.translation import gettext_lazy as _
 # Create your views here.
-
+def updates(request):
+    return render(request, 'updates.html')
 def index(request):
     features = Feature.objects.all()
     return render(request, 'index.html', {'features': features})
@@ -100,6 +101,18 @@ def CreatePost(request):
             return redirect('counter')
     return render(request, 'createpost.html',{'form': form})
 
+@login_required(login_url='register')
+def userslist(request):
+    profiles = Profile.objects.exclude(user=request.user)
+    context = {'profiles': profiles}
+    return render(request, 'users.html', context)
+
+def follow(request, user_id):
+    profile = Profile.objects.get(user=request.user)
+    follow = Profile.objects.get(id=user_id)
+    profile.followings.add(follow)
+    profile.save()
+    return redirect('counter')
 
 def profile(request, user_id):
     profile = User.objects.get(id=user_id)

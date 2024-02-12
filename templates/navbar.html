@@ -14,7 +14,7 @@
     
     <nav class="navbar bg-body-tertiary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'counter' %}">socblog</a>
+        <a class="navbar-brand" href="{% url 'counter' %}">social blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,12 +33,17 @@
                 <a class="nav-link" href="{% url 'CreatePost' %}">create post</a>
                 {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'register' %}">create post</a>
+                  <a class="nav-link" href="{% url 'register' %}">register</a>
+                </li>
                 {% endif %}
-              </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'counter' %}">posts</a>
+                <a class="nav-link" href="{% url 'counter' %}">home</a>
               </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' user.id %}">profile</a>
+              </li>
+              {% endif %}
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{% url 'languges' %}" role="button" >

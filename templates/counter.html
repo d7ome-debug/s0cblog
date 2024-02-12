@@ -53,14 +53,41 @@
       {{message}}
     </h6>
     {% endfor %}
-    <!-- Example Code -->
+    <!-- updates popup -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /* Style for the container */
+            .update-container {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: #f9f9f9;
+                border: 1px solid #ccc;
+                padding: 10px;
+                width: 200px;
+            }
+    
+            /* Style for the close button */
+            .close-button {
+                cursor: pointer;
+                float: right;
+                font-size: 18px;
+            }
+        </style>
+
+    </head>
+    </html>
+    
+    <!-- end popup -->
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for post in posts %}
+    <div>
     <div class="col">
-        {% if request.user == post.author %}
-        <a href="{% url 'update_post' post.id %}" class="btn btn-primary">update post</a>
-        {% endif %}
 
         <div class="card h-100">
           {% if post.image %}
@@ -69,7 +96,10 @@
           <div class="card-body" width="200" height="200" >
             <a href="{% url 'profile' post.author.id %}" class="card-title">{{post.author}}</a>
             <h5 class="card-title">{{post.title}}</h5>
-            
+            {% if request.user == post.author %}
+            <a href="{% url 'update_post' post.id %}" class="btn btn-primary">update post</a>
+            {% endif %}
+    
           </div>
           <div class="card-footer">
             <a href="{% url 'post' post.id %}" class="btn btn-primary">Read more</a>
@@ -104,12 +134,36 @@
           </div>
         </div>
       </div>
+    </div>
       {% endfor %}
     </div>
     </body>
 </html>
 <hr>
+<body>
+  <div class="update-container">
+      <span class="close-button" onclick="closeContainer()">×</span>
+      <p>New updates:</p>
+      <ul>
+          <li>Added profile form!</li>
+          <li>Added follower/following!</li>
+          <li>Added languages!</li>
+          <!-- <li>Added chat rooms!</li>
+          <li><strong>Updated desing!</strong></li>
+          <li><strong>Updated follow/following form!</strong></li><hr> -->
+          <a href="{% url 'updates' %}">Read more</a>
+          <!-- Add more updates here -->
+      </ul>
+  </div>
 
+  <script>
+      // Function to close the container
+      function closeContainer() {
+          const container = document.querySelector('.update-container');
+          container.style.display = 'none'; // Hide the container
+      }
+  </script>
+</body>
 <div class="col-lg-3 col-md-6 footer-links">
   <h4>Our Social Networks</h4>
   <div class="social-links mt-3">
@@ -122,14 +176,15 @@
 </footer><!-- End Footer -->
 <div class="container footer-bottom clearfix">
   <div class="copyright">
-    &copy; Copyright <strong><span>Abdulrahman</span></strong>. All Rights Reserved 2023-2024
+    &copy; Copyright <strong><span>CodeWithDF</span></strong>. All Rights Reserved 2023-2024
   </div>
   <div class="credits">
     <!-- All the links in the footer should remain intact. -->
     <!-- You can delete the links only if you purchased the pro version. -->
     <!-- Licensing information: https://bootstrapmade.com/license/ -->
     <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-    Designed by <a>Abdulrahman</a>
+    Designed by <a>CodeWithDF</a>
+
   </div>
 </div>
 </footer><!-- End Footer -->

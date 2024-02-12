@@ -17,6 +17,9 @@ urlpatterns = [
     path('comment/<str:post_id>', views.comment, name='comment'),
     path('languges', views.languges, name='languges'),
     path('blog', views.blog, name='blog'),
+    path('updates', views.updates, name='updates'),
+    path('userslist', views.userslist, name="users"),
+    path('follow/<int:user_id>', views.follow, name="follow")
 ]
 
 

@@ -8,6 +8,7 @@
 <img src="{{post.image.url}}" />
 {% endif %}
 <p>{{post.content}}</p>
+<small>{{post.date|timesince}}</small>
 <hr>
 {% if user.is_authenticated %}
 <h6>  {{post.comment_set.count}} comments </h6>
@@ -22,7 +23,7 @@
 {% endif %}
 {% for comment in post.comment_set.all %}
     <br>
-    <a href="{% url 'profile' comment.user.id %}">@{{ comment.user }}</a> <a>{{comment.date}}</a>
+    <a href="{% url 'profile' comment.user.id %}">@{{ comment.user }}</a> <a>{{comment.date|timesince}}</a>
     <p>{{ comment }}</p>
     <hr>
     

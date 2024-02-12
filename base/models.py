@@ -4,12 +4,26 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+def follower_choices():
+    pass
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True,null=True,default='')
     profileimg = models.ImageField(upload_to='profileimg', default='blank-profile-picture.png')
-    location = models.CharField(max_length=100,blank=True, default='')
-
+    followers = models.ManyToManyField('self', blank=True, related_name='base_followers', symmetrical=False)
+    followings = models.ManyToManyField('self', blank=True, related_name='base_followings', symmetrical=False)
+    
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for user in self.followers.all():
+            user.followings.add(self)
+        for user in self.followings.all():
+            user.followers.add(self)
+        super().save(*args, **kwargs)
+        
+    
     def __str__(self):
         return self.user.username
 
