@@ -13,6 +13,7 @@ urlpatterns = [
     path('home', views.index, name='index'),
     path('update-post/<int:post_id>', views.updatepost, name='update_post'),
     # path('search', views.search_blogs, name='search_blogs'),
+    path('delete-post/<int:post_id>/', views.deletepost, name="delete-post"),
     path('like/<int:post_id>', views.like_post, name='like'),
     path('comment/<str:post_id>', views.comment, name='comment'),
     path('languges', views.languges, name='languges'),

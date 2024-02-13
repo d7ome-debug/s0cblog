@@ -15,6 +15,15 @@ def index(request):
 def blog(request):
     return render(request, 'blog.html')
 
+@login_required(login_url='login')
+def deletepost(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('counter')
+    return render(request, 'delete.html', {'post': post})
+
+
 def languges(request):
     return render(request, 'languges.html')
 

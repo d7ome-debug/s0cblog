@@ -97,7 +97,8 @@
             <a href="{% url 'profile' post.author.id %}" class="card-title">{{post.author}}</a>
             <h5 class="card-title">{{post.title}}</h5>
             {% if request.user == post.author %}
-            <a href="{% url 'update_post' post.id %}" class="btn btn-primary">update post</a>
+            <a href="{% url 'update_post' post.id %}" class="btn btn-primary">Update post</a>
+            <a href="{% url 'delete-post' post.id %}" class="btn btn-primary">Delete post</a>
             {% endif %}
     
           </div>
@@ -147,7 +148,7 @@
       <ul>
           <li>Added profile form!</li>
           <li>Added follower/following!</li>
-          <li>Added languages!</li>
+          <li>Added delete post!</li>
           <!-- <li>Added chat rooms!</li>
           <li><strong>Updated desing!</strong></li>
           <li><strong>Updated follow/following form!</strong></li><hr> -->
