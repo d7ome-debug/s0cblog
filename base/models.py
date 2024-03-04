@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 def follower_choices():
     pass
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True,null=True,default='')
@@ -15,7 +17,7 @@ class Profile(models.Model):
     followings = models.ManyToManyField('self', blank=True, related_name='base_followings', symmetrical=False)
     
     
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs): # args for posentinal argements kwargs for keyword posentianl argemnets
         super().save(*args, **kwargs)
         for user in self.followers.all():
             user.followings.add(self)

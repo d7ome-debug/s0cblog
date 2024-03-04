@@ -8,9 +8,13 @@ from django.utils.translation import gettext_lazy as _
 # Create your views here.
 def updates(request):
     return render(request, 'updates.html')
+
+
 def index(request):
     features = Feature.objects.all()
     return render(request, 'index.html', {'features': features})
+
+
 
 def blog(request):
     return render(request, 'blog.html')
@@ -98,6 +102,24 @@ def comment(request, post_id):
     return render(request, 'comment.html',{'form': form})
 
 
+
+
+def share_twitter_post(request):
+    if request.method == "POST":
+        # Get the Twitter post URL and title from the form input
+        twitter_post_url = request.POST.get("twitter_post_url")
+        twitter_post_title = request.POST.get("twitter_post_title")
+    else:
+        # Default values (you can remove this if not needed)
+        twitter_post_url = ""
+        twitter_post_title = ""
+
+    # Pass the Twitter post URL and title to the template
+    context = {"twitter_post_url": twitter_post_url, "twitter_post_title": twitter_post_title}
+    return render(request, "share_twitter_post.html", context)
+
+
+
 def CreatePost(request):
     form = PostForm
     if request.method == "POST":
@@ -177,5 +199,3 @@ def like_post(request, post_id):
             post.likes.remove(request.user)
         post.save()
         return redirect('counter')
-    
-    

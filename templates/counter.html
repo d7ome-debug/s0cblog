@@ -94,7 +94,11 @@
           <img src="{{post.image.url}}"  max-width: 100%; height: auto; width: 350px; height: 400px; @media (min-width: 600px) { width: 600px; height: 600px; }">
           {% endif %}
           <div class="card-body" width="200" height="200" >
-            <a href="{% url 'profile' post.author.id %}" class="card-title">{{post.author}}</a>
+            {% if post.author == request.user and port.author.is_superuser %}
+            <a href="{% url 'profile' post.author.id %}" style="color: yellow;" class="card-title">{{post.author}} superuser💫!</a>
+            {% elif post.author == request.user or post.author.is_superuser %}
+            <a href="{% url 'profile' post.author.id %}" class="card-title">{{post.author}} onwer</a>
+            {% endif %}
             <h5 class="card-title">{{post.title}}</h5>
             {% if request.user == post.author %}
             <a href="{% url 'update_post' post.id %}" class="btn btn-primary">Update post</a>
@@ -146,9 +150,7 @@
       <span class="close-button" onclick="closeContainer()">×</span>
       <p>New update:</p>
       <ul>
-          <li>Added profile form!</li>
-          <li>Added follower/following!</li>
-          <li>Added delete post!</li>
+          <li>Added distinguishes role(superuser💫)!</li>
           <!-- <li>Added chat rooms!</li>
           <li><strong>Updated desing!</strong></li>
           <li><strong>Updated follow/following form!</strong></li><hr> -->
@@ -186,6 +188,6 @@
   </div>
 </div>
 
-  <strong>badges:</strong><hr>
-  <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="a60a3d84-34f9-44bf-baf6-3b3d12491816" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-</footer><!-- End Footer -->
+  <!-- <strong>badges:</strong><hr> -->
+  <!-- <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="a60a3d84-34f9-44bf-baf6-3b3d12491816" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script> -->
+</footer>End Footer
