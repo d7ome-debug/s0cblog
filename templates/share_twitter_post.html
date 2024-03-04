@@ -1,0 +1,28 @@
+<!-- share_twitter_post.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Share Twitter Post</title>
+    <!-- Include Twitter widgets.js script -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</head>
+<body>
+    <h1>Share Twitter Post</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Enter the Twitter post URL:</p>
+        <input type="text" name="twitter_post_url" value="{{ twitter_post_url }}">
+        <p>Enter a title for the tweet:</p>
+        <input type="text" name="twitter_post_title" value="{{ twitter_post_title }}">
+        <input type="submit" value="Share">
+    </form>
+    {% if twitter_post_url %}
+        <div>
+            <h2>{{ twitter_post_title }}</h2>
+            <blockquote class="twitter-tweet">
+                <a href="{{ twitter_post_url }}"></a>
+            </blockquote>
+        </div>
+    {% endif %}
+</body>
+</html>
