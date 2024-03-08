@@ -1,0 +1,21 @@
+{% include 'navbar.html' %}
+<!-- shared_tweets.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shared Tweets</title>
+</head>
+<body>
+    <h1>Shared Tweets</h1>
+    <ul>
+        {% for tweet in shared_tweets %}
+            <li>
+                <h2>{{ tweet.title }}</h2>
+                <blockquote class="twitter-tweet">
+                    <a href="{{ tweet.url }}"></a>
+                </blockquote>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
