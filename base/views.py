@@ -90,8 +90,6 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
-
-
 def comment(request, post_id):
 
     form = CommentForm
@@ -103,20 +101,20 @@ def comment(request, post_id):
 
 
 
+# myapp/views.py
+
 
 def share_twitter_post(request):
     if request.method == "POST":
-        # Get the Twitter post URL and title from the form input
+        title = request.POST.get("title")
         twitter_post_url = request.POST.get("twitter_post_url")
-        twitter_post_title = request.POST.get("twitter_post_title")
-    else:
-        # Default values (you can remove this if not needed)
-        twitter_post_url = ""
-        twitter_post_title = ""
+        Tweet.objects.create(title=title, twitter_post_url=twitter_post_url)
+        return redirect("home")  # Redirect to the home page
+    return render(request, "share_twitter_post.html")
 
-    # Pass the Twitter post URL and title to the template
-    context = {"twitter_post_url": twitter_post_url, "twitter_post_title": twitter_post_title}
-    return render(request, "share_twitter_post.html", context)
+def display_shared_tweets(request):
+    shared_tweets = Tweet.objects.all()
+    return render(request, "shared_tweets.html", {"shared_tweets": shared_tweets})
 
 
 
@@ -168,6 +166,18 @@ def counter(request):
         'posts': posts,
     }
     return render(request, 'counter.html', context)
+
+
+
+def twitter_posts(request):
+    tweets = Twitter.objects.all()
+
+    context = {
+        'tweets': tweets,
+    }
+    return render(request, 'twitter.html', context)
+
+
 
 def post(request, id):
     post = Post.objects.get(id=id)

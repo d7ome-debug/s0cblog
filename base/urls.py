@@ -15,6 +15,7 @@ urlpatterns = [
     # path('search', views.search_blogs, name='search_blogs'),
     path('delete-post/<int:post_id>/', views.deletepost, name="delete-post"),
     path('share_twitter_post', views.share_twitter_post, name="share_twitter_post"),
+    path("tweets/", views.display_shared_tweets, name="tweets"),
     path('like/<int:post_id>', views.like_post, name='like'),
     path('comment/<str:post_id>', views.comment, name='comment'),
     path('languges', views.languges, name='languges'),

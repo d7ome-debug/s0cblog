@@ -7,6 +7,13 @@ from django.contrib.auth.models import User
 def follower_choices():
     pass
 
+class Tweet(models.Model):
+    title = models.CharField(max_length=200)
+    twitter_post_url = models.URLField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Profile(models.Model):
