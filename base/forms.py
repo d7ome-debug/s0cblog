@@ -7,10 +7,6 @@ class PostForm(ModelForm):
         fields = ["title", "image" ] # something like this
         
         
-class ProfileForm(ModelForm):
-    class Meta:
-        model = Profile
-        fields = ["bio", "profileimg"] # something like this
 
 
 class CommentForm(ModelForm):

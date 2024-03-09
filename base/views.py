@@ -31,6 +31,8 @@ def deletepost(request, post_id):
 def languges(request):
     return render(request, 'languges.html')
 
+
+
 def updatepost(request, post_id):
 
     post = Post.objects.get(id=post_id)

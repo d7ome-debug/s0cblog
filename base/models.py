@@ -16,13 +16,7 @@ class Tweet(models.Model):
         return self.title
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True,null=True,default='')
-    profileimg = models.ImageField(upload_to='profileimg', default='blank-profile-picture.png')
-    followers = models.ManyToManyField('self', blank=True, related_name='base_followers', symmetrical=False)
-    followings = models.ManyToManyField('self', blank=True, related_name='base_followings', symmetrical=False)
-    
+
     
     def save(self, *args, **kwargs): # args for posentinal argements kwargs for keyword posentianl argemnets
         super().save(*args, **kwargs)
